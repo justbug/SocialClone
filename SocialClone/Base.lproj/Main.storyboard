@@ -65,7 +65,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4Wc-Qk-2Od" customClass="FancyField" customModule="SocialClone" customModuleProvider="target">
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -86,6 +86,9 @@
                                         <state key="normal" title="Sign In">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signInBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9eE-HS-qhf"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RId-9Z-sZZ" customClass="RoundBtn" customModule="SocialClone" customModuleProvider="target">
                                         <color key="backgroundColor" red="0.1803921568627451" green="0.27058823529411763" blue="0.52941176470588236" alpha="1" colorSpace="calibratedRGB"/>
@@ -94,7 +97,7 @@
                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="tappedFBLoginBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g8o-pj-GqA"/>
+                                            <action selector="FBLoginBtnTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eQy-Zj-4OL"/>
                                         </connections>
                                     </button>
                                 </subviews>
