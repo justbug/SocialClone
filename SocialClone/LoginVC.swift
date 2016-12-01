@@ -10,7 +10,8 @@ import UIKit
 import FBSDKCoreKit
 import FBSDKLoginKit
 import FirebaseAuth
-class ViewController: UIViewController,UITextFieldDelegate {
+import SwiftKeychainWrapper
+class LoginVC: UIViewController,UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: FancyField!
     @IBOutlet weak var pwdTextField: FancyField!
@@ -20,6 +21,11 @@ class ViewController: UIViewController,UITextFieldDelegate {
         emailTextField.delegate = self
         pwdTextField.delegate = self
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if let _ = KeychainWrapper.standard.string(forKey: KEY_USER_ID) {
+            performSegue(withIdentifier: "goFeedView", sender: nil)
+        }
     }
     
     @IBAction func signInBtnTapped(_ sender:UIButton) {
@@ -44,7 +50,7 @@ class ViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func checkTextfieldTypingError(completed: ()->()){
+    func checkTextfieldTypingError(completed: ()->()) {
         
         let alertViewController = UIAlertController(title: "登入失敗", message: "", preferredStyle: .alert)
         let alertAction = UIAlertAction(title: "重新輸入", style: .default, handler: nil)
@@ -66,24 +72,35 @@ class ViewController: UIViewController,UITextFieldDelegate {
         }
     }
     
+    func checkUserKeyChain(_ user: FIRUser) {
+        KeychainWrapper.standard.set(user.uid, forKey: KEY_USER_ID)
+        self.performSegue(withIdentifier: "goFeedView", sender: nil)
+    }
+    
     // MARK: - firebaseAuth
     
-    func firebaseAuthCredential(_ credential:FIRAuthCredential){
+    func firebaseAuthCredential(_ credential:FIRAuthCredential) {
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil{
                 print("MARK: Unable to authenticate with firebase - \(error)")
             }else {
                 print("MARK: Success, authenticate with firebase")
+                if let user = user {
+                    self.checkUserKeyChain(user)
+                }
             }
         })
         
     }
     
     func firebaseAuthEmail() {
-        if let email = emailTextField.text,let pwd = pwdTextField.text {
+        if let email = emailTextField.text, let pwd = pwdTextField.text {
             FIRAuth.auth()?.signIn(withEmail: email, password: pwd, completion: { (user, error) in
                 if error == nil {
                     print("MARK: (Email) User authenticate with firebase")
+                    if let user = user {
+                        self.checkUserKeyChain(user)
+                    }
                 }else {
                     FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
                         if error != nil {
@@ -91,6 +108,9 @@ class ViewController: UIViewController,UITextFieldDelegate {
                             print(error)
                         }else {
                             print("MARK: (Email) User successfully create a new account")
+                            if let user = user {
+                                self.checkUserKeyChain(user)
+                            }
                         }
                     })
                 }
