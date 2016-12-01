@@ -29,7 +29,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
     }
     
     @IBAction func signInBtnTapped(_ sender:UIButton) {
-        self.checkTextfieldTypingError {
+        if self.checkTextfieldTypingError() {
             self.firebaseAuthEmail()
         }
     }
@@ -50,31 +50,38 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         }
     }
     
-    func checkTextfieldTypingError(completed: ()->()) {
+    func checkTextfieldTypingError() -> Bool {
         
-        let alertViewController = UIAlertController(title: "登入失敗", message: "", preferredStyle: .alert)
-        let alertAction = UIAlertAction(title: "重新輸入", style: .default, handler: nil)
-        alertViewController.addAction(alertAction)
-        
-        if emailTextField.text == "" || pwdTextField.text == "" {
-            alertViewController.message = "電子郵件或密碼有一欄為空值"
-            self.present(alertViewController, animated: true, completion: nil)
-        }else {
-            if !(emailTextField.text?.isValidEmail())! {
-                alertViewController.message = "電子郵件格式不正確"
-                self.present(alertViewController, animated: true, completion: nil)
-            }else  if (pwdTextField.text?.characters.count)! < 6{
-                alertViewController.message = "密碼不能少於5個字元"
-                self.present(alertViewController, animated: true, completion: nil)
-            }else {
-                completed()
-            }
+        guard let email = emailTextField.text, let pwd = pwdTextField.text , !email.isEmpty , !pwd.isEmpty else {
+            self.showAlertView(message: InputError.EmptyField.rawValue)
+            return false
         }
+        
+        guard let emailFormat = emailTextField.text, emailFormat.isValidEmail() else {
+            self.showAlertView(message: InputError.EmailIsNotFormat.rawValue)
+            return false
+        }
+        
+        guard let pwdFormat = pwdTextField.text, pwdFormat.characters.count>=6 else {
+            self.showAlertView(message: InputError.PasswordIsNotFormat.rawValue)
+            return false
+        }
+        
+        return true
     }
     
     func checkUserKeyChain(_ user: FIRUser) {
         KeychainWrapper.standard.set(user.uid, forKey: KEY_USER_ID)
         self.performSegue(withIdentifier: "goFeedView", sender: nil)
+    }
+    
+    func showAlertView(message: String) {
+        let alertViewController = UIAlertController(title: "登入失敗", message: "", preferredStyle: .alert)
+        let alertAction = UIAlertAction(title: "重新輸入", style: .default, handler: nil)
+        alertViewController.addAction(alertAction)
+        
+        alertViewController.message = message
+        self.present(alertViewController, animated: true, completion: nil)
     }
     
     // MARK: - firebaseAuth
@@ -117,7 +124,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
             })
         }
     }
-
+    
     // MARK: - dismiss textfield
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
