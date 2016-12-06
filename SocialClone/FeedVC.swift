@@ -9,11 +9,14 @@
 import UIKit
 import SwiftKeychainWrapper
 import FirebaseAuth
-class FeedVC: UIViewController {
+class FeedVC: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    @IBOutlet weak var signOutBtn: UIButton!
 
+    @IBOutlet weak var feedTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        signOutBtn.imageView?.contentMode = .scaleAspectFit
         // Do any additional setup after loading the view.
     }
     
@@ -24,5 +27,16 @@ class FeedVC: UIViewController {
             performSegue(withIdentifier: "goLoginView", sender: nil)
         }
     }
-
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") {
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
 }
