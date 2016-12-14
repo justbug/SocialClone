@@ -151,7 +151,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="338" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-rh-x3l">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="338" id="3Be-g0-zQT">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="338" id="3Be-g0-zQT" customClass="PostCell" customModule="SocialClone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="338"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3Be-g0-zQT" id="fYj-eE-7mC">
@@ -177,10 +177,10 @@
                                                         </stackView>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-hB-99i">
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="kRv-84-rEW"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kRv-84-rEW"/>
                                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-wm-LJ4">
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                                    <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                                                    <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                 </textView>
@@ -234,12 +234,15 @@
                                                 <constraint firstItem="kDc-4o-snG" firstAttribute="trailing" secondItem="fYj-eE-7mC" secondAttribute="trailingMargin" id="qmM-im-JKc"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="caption" destination="Ajb-wm-LJ4" id="Qf6-U2-gSU"/>
+                                            <outlet property="likes" destination="Sor-UN-PbW" id="lQt-Iz-TnP"/>
+                                            <outlet property="postImage" destination="kRv-84-rEW" id="Kbg-xh-TsB"/>
+                                            <outlet property="profileImage" destination="TTZ-Qc-YCf" id="Kbj-qz-vDg"/>
+                                            <outlet property="profileName" destination="JVu-Xw-fcZ" id="9QB-Ti-GHl"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="Jc4-rB-MMG" id="emk-EF-W9e"/>
-                                    <outlet property="delegate" destination="Jc4-rB-MMG" id="O4C-wN-zBv"/>
-                                </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3eV-l9-w3E">
                                 <subviews>
@@ -266,7 +269,7 @@
                                     <constraint firstItem="XT2-UY-4yY" firstAttribute="top" secondItem="3eV-l9-w3E" secondAttribute="top" constant="29" id="L9M-Ax-7jr"/>
                                     <constraint firstAttribute="height" constant="80" id="OFp-5T-zSU"/>
                                     <constraint firstItem="Wb6-mK-UGL" firstAttribute="centerY" secondItem="3eV-l9-w3E" secondAttribute="centerY" constant="6.5" id="TaP-f4-EWo"/>
-                                    <constraint firstItem="XT2-UY-4yY" firstAttribute="leading" secondItem="Wb6-mK-UGL" secondAttribute="trailing" constant="78" id="j18-Qh-bD2"/>
+                                    <constraint firstItem="XT2-UY-4yY" firstAttribute="leading" secondItem="Wb6-mK-UGL" secondAttribute="trailing" constant="95" id="j18-Qh-bD2"/>
                                     <constraint firstItem="XT2-UY-4yY" firstAttribute="centerX" secondItem="3eV-l9-w3E" secondAttribute="centerX" id="tZP-NK-BBu"/>
                                     <constraint firstItem="Wb6-mK-UGL" firstAttribute="top" secondItem="3eV-l9-w3E" secondAttribute="top" constant="24" id="zvR-Dp-dCA"/>
                                 </constraints>
@@ -275,10 +278,15 @@
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="99D-sK-vfc">
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile" translatesAutoresizingMaskIntoConstraints="NO" id="h4A-bm-6P0" customClass="CircleView" customModule="SocialClone" customModuleProvider="target">
+                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-image" translatesAutoresizingMaskIntoConstraints="NO" id="h4A-bm-6P0" customClass="CircleView" customModule="SocialClone" customModuleProvider="target">
+                                                <color key="backgroundColor" red="0.0" green="0.50196081400000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <gestureRecognizers/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="50" id="L4r-pQ-oo7"/>
                                                 </constraints>
+                                                <connections>
+                                                    <outletCollection property="gestureRecognizers" destination="Omg-Mc-Nlp" appends="YES" id="QYR-vf-4m7"/>
+                                                </connections>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="add somthing" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lVB-aG-0cF">
                                                 <nil key="textColor"/>
@@ -310,7 +318,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.93725490199999995" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="mv2-YV-dsh" firstAttribute="leading" secondItem="sGd-bi-9OW" secondAttribute="leadingMargin" id="24I-Dk-C5H"/>
                             <constraint firstItem="3eV-l9-w3E" firstAttribute="leading" secondItem="nfn-rh-x3l" secondAttribute="leading" id="2Sz-Ve-v63"/>
@@ -325,20 +333,26 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="feedTableView" destination="nfn-rh-x3l" id="P5Y-Aj-Efx"/>
+                        <outlet property="addImage" destination="h4A-bm-6P0" id="JZC-vs-tOV"/>
+                        <outlet property="feedTableView" destination="nfn-rh-x3l" id="Qvu-tk-89E"/>
                         <outlet property="signOutBtn" destination="Wb6-mK-UGL" id="LDD-EH-B6l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H44-1t-l4N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Omg-Mc-Nlp">
+                    <connections>
+                        <action selector="tapImagePicker:" destination="Jc4-rB-MMG" id="PqL-Wl-74s"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="831.20000000000005" y="134.48275862068968"/>
         </scene>
     </scenes>
     <resources>
+        <image name="add-image" width="88" height="88"/>
         <image name="add-post" width="88" height="88"/>
         <image name="devslopes-logo" width="150" height="94"/>
         <image name="empty-heart" width="70" height="70"/>
-        <image name="placeholder" width="567" height="312"/>
         <image name="profile" width="113" height="155"/>
         <image name="sign-out" width="92" height="65"/>
     </resources>

@@ -23,6 +23,7 @@ class LoginVC: UIViewController,UITextFieldDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewDidAppear(_ animated: Bool) {
+        //if user has login,go to feedview
         if let _ = KeychainWrapper.standard.string(forKey: KEY_USER_ID) {
             performSegue(withIdentifier: "goFeedView", sender: nil)
         }
@@ -93,6 +94,8 @@ class LoginVC: UIViewController,UITextFieldDelegate {
             }else {
                 print("MARK: Success, authenticate with firebase")
                 if let user = user {
+                    let userdata = ["provider": credential.provider]
+                    DataService.dataservice.createDBUser(uid: user.uid, userData: userdata)
                     self.checkUserKeyChain(user)
                 }
             }
@@ -106,6 +109,8 @@ class LoginVC: UIViewController,UITextFieldDelegate {
                 if error == nil {
                     print("MARK: (Email) User authenticate with firebase")
                     if let user = user {
+                        let userdata = ["provider": user.providerID]
+                        DataService.dataservice.createDBUser(uid: user.uid, userData: userdata)
                         self.checkUserKeyChain(user)
                     }
                 }else {
@@ -116,6 +121,8 @@ class LoginVC: UIViewController,UITextFieldDelegate {
                         }else {
                             print("MARK: (Email) User successfully create a new account")
                             if let user = user {
+                                let userdata = ["provider": user.providerID]
+                                DataService.dataservice.createDBUser(uid: user.uid, userData: userdata)
                                 self.checkUserKeyChain(user)
                             }
                         }
