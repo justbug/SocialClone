@@ -148,7 +148,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="338" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-rh-x3l">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="338" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="nfn-rh-x3l">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="338" id="3Be-g0-zQT" customClass="PostCell" customModule="SocialClone" customModuleProvider="target">
@@ -178,7 +178,7 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="4rK-hB-99i">
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kRv-84-rEW"/>
-                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-wm-LJ4">
+                                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Ajb-wm-LJ4">
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -236,6 +236,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="caption" destination="Ajb-wm-LJ4" id="Qf6-U2-gSU"/>
+                                            <outlet property="likeImage" destination="SnB-pX-x7K" id="mVA-5y-1iM"/>
                                             <outlet property="likes" destination="Sor-UN-PbW" id="lQt-Iz-TnP"/>
                                             <outlet property="postImage" destination="kRv-84-rEW" id="Kbg-xh-TsB"/>
                                             <outlet property="profileImage" destination="TTZ-Qc-YCf" id="Kbj-qz-vDg"/>
@@ -300,6 +301,9 @@
                                                     <constraint firstAttribute="width" constant="50" id="ahz-RQ-OpP"/>
                                                 </constraints>
                                                 <state key="normal" image="add-post"/>
+                                                <connections>
+                                                    <action selector="tapAddCaptionBtn:" destination="Jc4-rB-MMG" eventType="touchUpInside" id="Ahs-z9-StW"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -334,6 +338,7 @@
                     </view>
                     <connections>
                         <outlet property="addImage" destination="h4A-bm-6P0" id="JZC-vs-tOV"/>
+                        <outlet property="captionTextField" destination="lVB-aG-0cF" id="lza-Gh-B8p"/>
                         <outlet property="feedTableView" destination="nfn-rh-x3l" id="Qvu-tk-89E"/>
                         <outlet property="signOutBtn" destination="Wb6-mK-UGL" id="LDD-EH-B6l"/>
                     </connections>
