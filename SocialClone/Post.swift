@@ -9,11 +9,21 @@
 import Foundation
 import  Firebase
 class Post {
+    private var _picture_url:String!
+    private var _poster_name:String!
     private var _caption: String!
     private var _imageUrl: String!
     private var _likes: Int!
     private var _postKey: String!
     private var _postRef: FIRDatabaseReference!
+    
+    var picture_url: String {
+        return _picture_url
+    }
+    
+    var poster_name: String {
+        return _poster_name
+    }
     
     var caption: String {
         return _caption
@@ -34,14 +44,22 @@ class Post {
         return _postKey
     }
     
-    init(caption: String, imageUrl: String, likes: Int) {
-        self._caption = caption
-        self._imageUrl = imageUrl
-        self._likes = likes
-    }
+//    init(caption: String, imageUrl: String, likes: Int) {
+//        self._caption = caption
+//        self._imageUrl = imageUrl
+//        self._likes = likes
+//    }
     
-    init(postKey: String, postData: Dictionary<String,AnyObject>) {
+    init(postKey: String, postData: Dictionary<String,Any>) {
         self._postKey = postKey
+        
+        if let pictureUrl = postData["picture_url"] as? String {
+            self._picture_url = pictureUrl
+        }
+        
+        if let posterName = postData["poster_name"] as? String{
+            self._poster_name = posterName
+        }
         
         if let caption = postData["caption"] as? String {
             self._caption = caption

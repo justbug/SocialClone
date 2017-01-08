@@ -22,7 +22,6 @@ class PostCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         let tap = UITapGestureRecognizer(target: self, action: #selector(likesTapped))
         tap.numberOfTapsRequired = 1
         likeImage.addGestureRecognizer(tap)
@@ -34,9 +33,15 @@ class PostCell: UITableViewCell {
         self.post = post
         self.caption.text = post.caption
         self.likes.text = String(post.likes)
-        
+        self.profileName.text = post.poster_name
         likeRef = DataService.dataservice.REF_CURRENT_USER.child("likes").child(post.postKey)
-        
+        let url = URL(string: post.picture_url)
+        if let data = try? Data(contentsOf: url!) {
+            if let image = UIImage(data: data) {
+                FeedVC.imageCache.setObject(image, forKey: post.picture_url as NSString)
+                self.profileImage.image = image
+            }
+        }
         if image != nil {
             self.postImage.image = image
         } else {

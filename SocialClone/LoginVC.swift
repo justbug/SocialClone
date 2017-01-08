@@ -37,7 +37,6 @@ class LoginVC: UIViewController {
     
     @IBAction func FBLoginBtnTapped(_ sender: UIButton) {
         let FBLogin = FBSDKLoginManager()
-        
         FBLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             if error != nil {
                 print("MARK: Unable to authenticate with facebook - \(error)")
@@ -45,8 +44,14 @@ class LoginVC: UIViewController {
                 print("MARK: User cancelled facebook authenticate")
             }else{
                 print("MARK: Success, authenticate with facebook")
-                let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                self.firebaseAuthCredential(credential)
+                FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"id, name, email, picture.type(large)"]).start(completionHandler: { (connection, result, error) in
+                    if error == nil {
+                        let userInfo = result as! [String:Any]
+                        let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
+                        print(userInfo)
+                        self.firebaseAuthCredential(credential, userInfo: userInfo)
+                    }
+                })
             }
         }
     }
@@ -87,20 +92,20 @@ class LoginVC: UIViewController {
     
     // MARK: - firebaseAuth
     
-    func firebaseAuthCredential(_ credential:FIRAuthCredential) {
+    func firebaseAuthCredential(_ credential:FIRAuthCredential,userInfo: [String:Any]) {
         FIRAuth.auth()?.signIn(with: credential, completion: { (user, error) in
             if error != nil{
                 print("MARK: Unable to authenticate with firebase - \(error)")
             }else {
                 print("MARK: Success, authenticate with firebase")
                 if let user = user {
-                    let userdata = ["provider": credential.provider]
+                    let picture = "https://graph.facebook.com/\(userInfo["id"]!)/picture?type=large"
+                    let userdata = ["provider": credential.provider,"name":userInfo["name"]!,"picture_url":picture]
                     DataService.dataservice.createDBUser(uid: user.uid, userData: userdata)
                     self.checkUserKeyChain(user)
                 }
             }
         })
-        
     }
     
     func firebaseAuthEmail() {
@@ -132,14 +137,12 @@ class LoginVC: UIViewController {
         }
     }
 }
-
 extension String {
     func isValidEmail() -> Bool{
         let emailRegex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}"
         return NSPredicate(format: "SELF MATCHES %@", emailRegex).evaluate(with: self)
     }
 }
-
 // MARK: - dismiss textfield
 extension LoginVC: UITextFieldDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

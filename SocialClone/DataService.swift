@@ -44,7 +44,7 @@ class DataService {
         let user = REF_USER.child(uid!)
         return user
     }
-    func createDBUser(uid: String, userData: Dictionary<String, String>) {
+    func createDBUser(uid: String, userData: Dictionary<String, Any>) {
         _REF_USER.child(uid).updateChildValues(userData)
     }
 }

@@ -22,6 +22,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     var imagePicker: UIImagePickerController!
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imageIsSelected = false
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
             self.posts = [] 
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for data in snapshot {
-                    if let postDic = data.value as? Dictionary<String, AnyObject> {
+                    if let postDic = data.value as? Dictionary<String, Any> {
                         let key = data.key
                         let post = Post(postKey: key, postData: postDic)
                         self.posts.insert(post, at: 0)
@@ -47,6 +48,30 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
             self.feedTableView.reloadData()
             }
             })
+    }
+    
+    func postToFirebase(imgUrl: String) {
+        DataService.dataservice.REF_CURRENT_USER.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? Dictionary<String,Any>
+            let poster_name = value?["name"] as? String ?? ""
+            let picture_Url = value?["picture_url"] as? String ?? ""
+            let post : Dictionary<String, Any> = [
+                "poster_name":poster_name,
+                "picture_url":picture_Url,
+                "caption": self.captionTextField.text!,
+                "image_url": imgUrl,
+                "likes": 0
+            ]
+            let firebasePost = DataService.dataservice.REF_POST.childByAutoId()
+            firebasePost.setValue(post)
+            
+            //Post complete,clean UI
+            self.captionTextField.text = ""
+            self.addImage.image = UIImage(named: "add-image")
+            self.imageIsSelected = false
+            self.feedTableView.reloadData()
+        })
+        
     }
     
     @IBAction func tapImagePicker(_ sender: AnyObject) {
@@ -72,7 +97,6 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         }
         
         if let imgData = UIImageJPEGRepresentation(img, 0.2) {
-            
             let imgUid = UUID().uuidString //create image unique id
             let metaData = FIRStorageMetadata()
             metaData.contentType = "image/jpeg"
@@ -84,6 +108,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
                         if let imgUrl = downloadUrl {
                         self.postToFirebase(imgUrl: imgUrl)
+                            
                     }
                 }
             }
@@ -91,23 +116,7 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         }
     }
     
-    func postToFirebase(imgUrl: String) {
-        let post : Dictionary<String, Any> = [
-            "caption": captionTextField.text!,
-            "image_url": imgUrl,
-            "likes": 0
-        ]
-        let firebasePost = DataService.dataservice.REF_POST.childByAutoId()
-        firebasePost.setValue(post)
-        
-        captionTextField.text = ""
-        addImage.image = UIImage(named: "add-image")
-        imageIsSelected = false
-        feedTableView.reloadData()
-    }
-    
 }
-
 // MARK: - UITableViewDelegate
 extension FeedVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -115,7 +124,6 @@ extension FeedVC: UITableViewDelegate {
     }
 
 }
-
 // MARK: - UITableViewDataSource
 extension FeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -133,7 +141,6 @@ extension FeedVC: UITableViewDataSource {
         }
     }
 }
-
 // MARK: - UIImagePickerControllerDelegate
 extension FeedVC: UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -146,7 +153,6 @@ extension FeedVC: UIImagePickerControllerDelegate {
         imagePicker.dismiss(animated: true, completion: nil)
     }
 }
-
 // MARK: - dismiss textfield
 extension FeedVC: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
