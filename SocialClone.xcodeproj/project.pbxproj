@@ -20,6 +20,11 @@
 		F38470471DE32A3D00605E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F38470451DE32A3D00605E42 /* LaunchScreen.storyboard */; };
 		F3A4EE721DE332C1003DB5CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3A4EE711DE332C1003DB5CF /* GoogleService-Info.plist */; };
 		F3AC417C1DF04D78006EFA6E /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC417B1DF04D78006EFA6E /* FeedVC.swift */; };
+		F3C36DB71DF832830094B44E /* DataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C36DB61DF832830094B44E /* DataService.swift */; };
+		F3C36DB91DFAA9D40094B44E /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C36DB81DFAA9D40094B44E /* Post.swift */; };
+		F3C4B9651DF586BD0069401D /* CircleBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C4B9641DF586BD0069401D /* CircleBtn.swift */; };
+		F3C4B9671DF587EB0069401D /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C4B9661DF587EB0069401D /* CircleView.swift */; };
+		F3C4B9691DF6BECA0069401D /* PostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3C4B9681DF6BECA0069401D /* PostCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +46,11 @@
 		F38470481DE32A3D00605E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A4EE711DE332C1003DB5CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F3AC417B1DF04D78006EFA6E /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
+		F3C36DB61DF832830094B44E /* DataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataService.swift; sourceTree = "<group>"; };
+		F3C36DB81DFAA9D40094B44E /* Post.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F3C4B9641DF586BD0069401D /* CircleBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleBtn.swift; sourceTree = "<group>"; };
+		F3C4B9661DF587EB0069401D /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
+		F3C4B9681DF6BECA0069401D /* PostCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +90,9 @@
 				F35B6D2D1DE488550002EF0D /* RoundBtn.swift */,
 				F35B6D2F1DE48B8A0002EF0D /* FancyField.swift */,
 				F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */,
+				F3C4B9641DF586BD0069401D /* CircleBtn.swift */,
+				F3C4B9661DF587EB0069401D /* CircleView.swift */,
+				F3C4B9681DF6BECA0069401D /* PostCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -87,6 +100,8 @@
 		F35B6D271DE47FA40002EF0D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F3C36DB61DF832830094B44E /* DataService.swift */,
+				F3C36DB81DFAA9D40094B44E /* Post.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -274,11 +289,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F35B6D301DE48B8A0002EF0D /* FancyField.swift in Sources */,
+				F3C4B9651DF586BD0069401D /* CircleBtn.swift in Sources */,
 				F384703F1DE32A3D00605E42 /* LoginVC.swift in Sources */,
+				F3C36DB71DF832830094B44E /* DataService.swift in Sources */,
+				F3C36DB91DFAA9D40094B44E /* Post.swift in Sources */,
 				F35B6D2E1DE488550002EF0D /* RoundBtn.swift in Sources */,
 				F384703D1DE32A3D00605E42 /* AppDelegate.swift in Sources */,
 				F3AC417C1DF04D78006EFA6E /* FeedVC.swift in Sources */,
+				F3C4B9671DF587EB0069401D /* CircleView.swift in Sources */,
 				F35B6D291DE4801D0002EF0D /* FancyView.swift in Sources */,
+				F3C4B9691DF6BECA0069401D /* PostCell.swift in Sources */,
 				F35B6D2C1DE481AD0002EF0D /* Constants.swift in Sources */,
 				F35B6D321DE48C8C0002EF0D /* FancyBtn.swift in Sources */,
 			);
