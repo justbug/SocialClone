@@ -14,11 +14,12 @@
 		F35B6D301DE48B8A0002EF0D /* FancyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D2F1DE48B8A0002EF0D /* FancyField.swift */; };
 		F35B6D321DE48C8C0002EF0D /* FancyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */; };
 		F384703D1DE32A3D00605E42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384703C1DE32A3D00605E42 /* AppDelegate.swift */; };
-		F384703F1DE32A3D00605E42 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384703E1DE32A3D00605E42 /* ViewController.swift */; };
+		F384703F1DE32A3D00605E42 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384703E1DE32A3D00605E42 /* LoginVC.swift */; };
 		F38470421DE32A3D00605E42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F38470401DE32A3D00605E42 /* Main.storyboard */; };
 		F38470441DE32A3D00605E42 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F38470431DE32A3D00605E42 /* Assets.xcassets */; };
 		F38470471DE32A3D00605E42 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F38470451DE32A3D00605E42 /* LaunchScreen.storyboard */; };
 		F3A4EE721DE332C1003DB5CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F3A4EE711DE332C1003DB5CF /* GoogleService-Info.plist */; };
+		F3AC417C1DF04D78006EFA6E /* FeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3AC417B1DF04D78006EFA6E /* FeedVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,12 +34,13 @@
 		F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
 		F38470391DE32A3D00605E42 /* SocialClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F384703C1DE32A3D00605E42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F384703E1DE32A3D00605E42 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F384703E1DE32A3D00605E42 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		F38470411DE32A3D00605E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F38470431DE32A3D00605E42 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F38470461DE32A3D00605E42 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F38470481DE32A3D00605E42 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F3A4EE711DE332C1003DB5CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F3AC417B1DF04D78006EFA6E /* FeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,7 +67,8 @@
 		F35B6D251DE47F840002EF0D /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F384703E1DE32A3D00605E42 /* ViewController.swift */,
+				F384703E1DE32A3D00605E42 /* LoginVC.swift */,
+				F3AC417B1DF04D78006EFA6E /* FeedVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -271,9 +274,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				F35B6D301DE48B8A0002EF0D /* FancyField.swift in Sources */,
-				F384703F1DE32A3D00605E42 /* ViewController.swift in Sources */,
+				F384703F1DE32A3D00605E42 /* LoginVC.swift in Sources */,
 				F35B6D2E1DE488550002EF0D /* RoundBtn.swift in Sources */,
 				F384703D1DE32A3D00605E42 /* AppDelegate.swift in Sources */,
+				F3AC417C1DF04D78006EFA6E /* FeedVC.swift in Sources */,
 				F35B6D291DE4801D0002EF0D /* FancyView.swift in Sources */,
 				F35B6D2C1DE481AD0002EF0D /* Constants.swift in Sources */,
 				F35B6D321DE48C8C0002EF0D /* FancyBtn.swift in Sources */,
@@ -320,6 +324,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -369,6 +374,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
