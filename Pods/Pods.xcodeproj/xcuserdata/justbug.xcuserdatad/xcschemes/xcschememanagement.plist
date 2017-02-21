@@ -29,6 +29,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Hero.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-SocialClone.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -42,6 +47,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1454F14BBC81566E70FC4752DC475E49</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>23BA9083ED0D2392A167A8AFA04427FA</key>
 		<dict>
 			<key>primary</key>
@@ -62,17 +72,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>9082E19894BE4F99A23BF9EEA197570C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9D0F2E5EA1B46A5D72FFD42B0B39DBBC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E09EB1A987EC63FD230C57C601A6CDBA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FCD597D38B814515CF26C09A477C2281</key>
+		<key>E34D122BB047F1DD1453B364FF9B311D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
