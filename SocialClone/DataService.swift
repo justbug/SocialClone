@@ -13,8 +13,10 @@ import SwiftKeychainWrapper
 let DB_BASE = FIRDatabase.database().reference()
 let STORAGE_BASE = FIRStorage.storage().reference()
 class DataService {
+    private init() {
+    }
+    //singleton
     static let dataservice = DataService()
-    
     //DB reference
     private let _REF_BASE = DB_BASE
     private let _REF_POST = DB_BASE.child("post")
@@ -22,6 +24,7 @@ class DataService {
     
     //Storage reference
     private var _REF_POST_IMAGE = STORAGE_BASE.child("post-images")
+    private var _REF_USER_IMAGE = STORAGE_BASE.child("user-images")
     
     var REF_BASE: FIRDatabaseReference {
         return _REF_BASE
@@ -37,6 +40,10 @@ class DataService {
     
     var REF_POST_IMAGE: FIRStorageReference {
         return _REF_POST_IMAGE
+    }
+    
+    var REF_USER_IMAGE: FIRStorageReference {
+        return _REF_USER_IMAGE
     }
     
     var REF_CURRENT_USER: FIRDatabaseReference {

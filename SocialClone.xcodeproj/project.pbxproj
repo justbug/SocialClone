@@ -8,11 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		A83F13BC3FF3695469B60D67 /* Pods_SocialClone.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22E509AE5726E315B8D8E790 /* Pods_SocialClone.framework */; };
+		F3114C101E5A911500ED3F6D /* ProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3114C0F1E5A911500ED3F6D /* ProgressView.swift */; };
+		F338D26C1E264B41002BB83A /* PopUpVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F338D26B1E264B41002BB83A /* PopUpVC.swift */; };
 		F35B6D291DE4801D0002EF0D /* FancyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D281DE4801D0002EF0D /* FancyView.swift */; };
 		F35B6D2C1DE481AD0002EF0D /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D2B1DE481AD0002EF0D /* Constants.swift */; };
 		F35B6D2E1DE488550002EF0D /* RoundBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D2D1DE488550002EF0D /* RoundBtn.swift */; };
 		F35B6D301DE48B8A0002EF0D /* FancyField.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D2F1DE48B8A0002EF0D /* FancyField.swift */; };
 		F35B6D321DE48C8C0002EF0D /* FancyBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */; };
+		F35BB19C1E50A1C200BE4DA9 /* ImageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35BB19B1E50A1C200BE4DA9 /* ImageVC.swift */; };
 		F384703D1DE32A3D00605E42 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384703C1DE32A3D00605E42 /* AppDelegate.swift */; };
 		F384703F1DE32A3D00605E42 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384703E1DE32A3D00605E42 /* LoginVC.swift */; };
 		F38470421DE32A3D00605E42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F38470401DE32A3D00605E42 /* Main.storyboard */; };
@@ -31,12 +34,15 @@
 		22E509AE5726E315B8D8E790 /* Pods_SocialClone.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SocialClone.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5F480EA5D73E51D15A95AE73 /* Pods-SocialClone.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialClone.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SocialClone/Pods-SocialClone.debug.xcconfig"; sourceTree = "<group>"; };
 		D056E9F93659EA3BD23C27E0 /* Pods-SocialClone.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SocialClone.release.xcconfig"; path = "Pods/Target Support Files/Pods-SocialClone/Pods-SocialClone.release.xcconfig"; sourceTree = "<group>"; };
+		F3114C0F1E5A911500ED3F6D /* ProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressView.swift; sourceTree = "<group>"; };
+		F338D26B1E264B41002BB83A /* PopUpVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpVC.swift; sourceTree = "<group>"; };
 		F35166CA1DEC74E90009A317 /* SocialClone.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SocialClone.entitlements; sourceTree = "<group>"; };
 		F35B6D281DE4801D0002EF0D /* FancyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyView.swift; sourceTree = "<group>"; };
 		F35B6D2B1DE481AD0002EF0D /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F35B6D2D1DE488550002EF0D /* RoundBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundBtn.swift; sourceTree = "<group>"; };
 		F35B6D2F1DE48B8A0002EF0D /* FancyField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyField.swift; sourceTree = "<group>"; };
 		F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FancyBtn.swift; sourceTree = "<group>"; };
+		F35BB19B1E50A1C200BE4DA9 /* ImageVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageVC.swift; sourceTree = "<group>"; };
 		F38470391DE32A3D00605E42 /* SocialClone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SocialClone.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F384703C1DE32A3D00605E42 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F384703E1DE32A3D00605E42 /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -79,6 +85,8 @@
 			children = (
 				F384703E1DE32A3D00605E42 /* LoginVC.swift */,
 				F3AC417B1DF04D78006EFA6E /* FeedVC.swift */,
+				F338D26B1E264B41002BB83A /* PopUpVC.swift */,
+				F35BB19B1E50A1C200BE4DA9 /* ImageVC.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -92,6 +100,7 @@
 				F35B6D311DE48C8C0002EF0D /* FancyBtn.swift */,
 				F3C4B9641DF586BD0069401D /* CircleBtn.swift */,
 				F3C4B9661DF587EB0069401D /* CircleView.swift */,
+				F3114C0F1E5A911500ED3F6D /* ProgressView.swift */,
 				F3C4B9681DF6BECA0069401D /* PostCell.swift */,
 			);
 			name = View;
@@ -188,7 +197,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Mark Chen";
 				TargetAttributes = {
 					F38470381DE32A3D00605E42 = {
@@ -290,6 +299,7 @@
 			files = (
 				F35B6D301DE48B8A0002EF0D /* FancyField.swift in Sources */,
 				F3C4B9651DF586BD0069401D /* CircleBtn.swift in Sources */,
+				F35BB19C1E50A1C200BE4DA9 /* ImageVC.swift in Sources */,
 				F384703F1DE32A3D00605E42 /* LoginVC.swift in Sources */,
 				F3C36DB71DF832830094B44E /* DataService.swift in Sources */,
 				F3C36DB91DFAA9D40094B44E /* Post.swift in Sources */,
@@ -299,6 +309,8 @@
 				F3C4B9671DF587EB0069401D /* CircleView.swift in Sources */,
 				F35B6D291DE4801D0002EF0D /* FancyView.swift in Sources */,
 				F3C4B9691DF6BECA0069401D /* PostCell.swift in Sources */,
+				F338D26C1E264B41002BB83A /* PopUpVC.swift in Sources */,
+				F3114C101E5A911500ED3F6D /* ProgressView.swift in Sources */,
 				F35B6D2C1DE481AD0002EF0D /* Constants.swift in Sources */,
 				F35B6D321DE48C8C0002EF0D /* FancyBtn.swift in Sources */,
 			);
@@ -367,7 +379,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -411,7 +423,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -423,12 +435,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5F480EA5D73E51D15A95AE73 /* Pods-SocialClone.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SocialClone/SocialClone.entitlements;
 				DEVELOPMENT_TEAM = D5Y4T59L79;
 				INFOPLIST_FILE = SocialClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b10009043.SocialClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.B10009043.SocialClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -438,12 +451,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = D056E9F93659EA3BD23C27E0 /* Pods-SocialClone.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SocialClone/SocialClone.entitlements;
 				DEVELOPMENT_TEAM = D5Y4T59L79;
 				INFOPLIST_FILE = SocialClone/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.b10009043.SocialClone;
+				PRODUCT_BUNDLE_IDENTIFIER = com.B10009043.SocialClone;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};

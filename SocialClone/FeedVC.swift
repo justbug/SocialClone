@@ -22,7 +22,8 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
     var imagePicker: UIImagePickerController!
     static var imageCache: NSCache<NSString, UIImage> = NSCache()
     var imageIsSelected = false
-
+    var isNewUser = false
+    var loadingIndicator = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,8 +36,14 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
         imagePicker.allowsEditing = true
         imagePicker.delegate = self
         
+        loadingIndicator.center = feedTableView.center
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = .gray
+        loadingIndicator.startAnimating()
+        self.view.addSubview(loadingIndicator)
+        
         DataService.dataservice.REF_POST.observe(.value, with: { (snapshot) in
-            self.posts = [] 
+            self.posts = []
             if let snapshot = snapshot.children.allObjects as? [FIRDataSnapshot] {
                 for data in snapshot {
                     if let postDic = data.value as? Dictionary<String, Any> {
@@ -45,38 +52,30 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
                         self.posts.insert(post, at: 0)
                     }
                 }
-            self.feedTableView.reloadData()
+                self.feedTableView.reloadData()
             }
-            })
-    }
-    
-    func postToFirebase(imgUrl: String) {
-        DataService.dataservice.REF_CURRENT_USER.observeSingleEvent(of: .value, with: { (snapshot) in
-            let value = snapshot.value as? Dictionary<String,Any>
-            let poster_name = value?["name"] as? String ?? ""
-            let picture_Url = value?["picture_url"] as? String ?? ""
-            let post : Dictionary<String, Any> = [
-                "poster_name":poster_name,
-                "picture_url":picture_Url,
-                "caption": self.captionTextField.text!,
-                "image_url": imgUrl,
-                "likes": 0
-            ]
-            let firebasePost = DataService.dataservice.REF_POST.childByAutoId()
-            firebasePost.setValue(post)
-            
-            //Post complete,clean UI
-            self.captionTextField.text = ""
-            self.addImage.image = UIImage(named: "add-image")
-            self.imageIsSelected = false
-            self.feedTableView.reloadData()
         })
         
+        if isNewUser {
+            let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "PopupID") as! PopUpVC
+            self.addChildViewController(popUpVC)
+            popUpVC.view.frame = self.view.frame
+            self.view.addSubview(popUpVC.view)
+            self.didMove(toParentViewController: self)
+        }
     }
-    
-    @IBAction func tapImagePicker(_ sender: AnyObject) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goImageVC" {
+            if let indexPath = feedTableView.indexPathForSelectedRow{
+                let destinationVC = segue.destination as! ImageVC
+                destinationVC.post = self.posts[(indexPath as NSIndexPath).row]
+            }
+        }
+    }
+    @IBAction func tapImagePicker(_ sender: UIGestureRecognizer) {
         present(imagePicker, animated: true, completion: nil)
     }
+
     
     @IBAction func signOutBtnTapped(_ sender: UIButton) {
         let removeSuccessful = KeychainWrapper.standard.removeObject(forKey: KEY_USER_ID)
@@ -108,14 +107,39 @@ class FeedVC: UIViewController, UINavigationControllerDelegate {
                     let downloadUrl = metaData?.downloadURL()?.absoluteString
                         if let imgUrl = downloadUrl {
                         self.postToFirebase(imgUrl: imgUrl)
-                            
+                        self.loadingIndicator.startAnimating()
                     }
                 }
             }
-            
         }
     }
     
+    func postToFirebase(imgUrl: String) {
+        
+        DataService.dataservice.REF_CURRENT_USER.observeSingleEvent(of: .value, with: { (snapshot) in
+            let value = snapshot.value as? Dictionary<String,Any>
+            let poster_name = value?["name"] as? String ?? ""
+            let picture_Url = value?["picture_url"] as? String ?? ""
+            let post : Dictionary<String, Any> = [
+                "poster_name":poster_name,
+                "picture_url":picture_Url,
+                "caption": self.captionTextField.text!,
+                "image_url": imgUrl,
+                "likes": 0
+            ]
+            
+            let firebasePost = DataService.dataservice.REF_POST.childByAutoId()
+            firebasePost.setValue(post)
+            
+            //Post complete,clean UI
+            self.captionTextField.text = ""
+            self.addImage.image = UIImage(named: "add-image")
+            self.imageIsSelected = false
+            self.feedTableView.reloadData()
+            self.loadingIndicator.stopAnimating()
+        })
+        
+    }
 }
 // MARK: - UITableViewDelegate
 extension FeedVC: UITableViewDelegate {
@@ -127,17 +151,24 @@ extension FeedVC: UITableViewDelegate {
 // MARK: - UITableViewDataSource
 extension FeedVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let post = posts[indexPath.row]
         if let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as? PostCell{
-            if let image = FeedVC.imageCache.object(forKey: post.imageUrl as NSString) {
-                cell.configureCell(post: post, image: image)
-            } else {
-                print("first download img")
-                cell.configureCell(post: post)
-            }
+            loadingIndicator.stopAnimating()
             return cell
         } else {
+            loadingIndicator.stopAnimating()
             return PostCell()
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let post = posts[indexPath.row]
+        let postCell = cell as! PostCell
+        
+        if let image = FeedVC.imageCache.object(forKey: post.imageUrl as NSString), let profile = FeedVC.imageCache.object(forKey: post.picture_url as NSString) {
+            postCell.configureCell(post: post, post_image: image, profile_image: profile)
+        } else {
+            print("first download img")
+            postCell.configureCell(post: post)
         }
     }
 }
@@ -148,7 +179,7 @@ extension FeedVC: UIImagePickerControllerDelegate {
             addImage.image = image
             imageIsSelected = true
         } else {
-            print("MAEK: a valid image wasn't selected")
+            print("MARK: a valid image wasn't selected")
         }
         imagePicker.dismiss(animated: true, completion: nil)
     }
@@ -159,7 +190,6 @@ extension FeedVC: UITextFieldDelegate {
         captionTextField.resignFirstResponder()
         return true
     }
-
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
         super.touchesBegan(touches, with: event)

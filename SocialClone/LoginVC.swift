@@ -15,17 +15,24 @@ class LoginVC: UIViewController {
     
     @IBOutlet weak var emailTextField: FancyField!
     @IBOutlet weak var pwdTextField: FancyField!
+    var newUserHasSign = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         emailTextField.delegate = self
         pwdTextField.delegate = self
-        // Do any additional setup after loading the view, typically from a nib.
     }
     override func viewDidAppear(_ animated: Bool) {
         //if user has login,go to feedview
         if let _ = KeychainWrapper.standard.string(forKey: KEY_USER_ID) {
             performSegue(withIdentifier: "goFeedView", sender: nil)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "goFeedView" {
+            let destinationVC = segue.destination as! FeedVC
+            destinationVC.isNewUser = newUserHasSign
         }
     }
     
@@ -36,6 +43,9 @@ class LoginVC: UIViewController {
     }
     
     @IBAction func FBLoginBtnTapped(_ sender: UIButton) {
+        
+
+        
         let FBLogin = FBSDKLoginManager()
         FBLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             if error != nil {
@@ -48,7 +58,7 @@ class LoginVC: UIViewController {
                     if error == nil {
                         let userInfo = result as! [String:Any]
                         let credential = FIRFacebookAuthProvider.credential(withAccessToken: FBSDKAccessToken.current().tokenString)
-                        print(userInfo)
+                        ProgressView.shared.showProgressView(self.view)
                         self.firebaseAuthCredential(credential, userInfo: userInfo)
                     }
                 })
@@ -59,20 +69,19 @@ class LoginVC: UIViewController {
     func checkTextfieldTypingError() -> Bool {
         
         guard let email = emailTextField.text, let pwd = pwdTextField.text , !email.isEmpty , !pwd.isEmpty else {
-            self.showAlertView(message: InputError.EmptyField.rawValue)
+            self.showAlertView(message: InputError.emptyField.rawValue)
             return false
         }
         
         guard let emailFormat = emailTextField.text, emailFormat.isValidEmail() else {
-            self.showAlertView(message: InputError.EmailIsNotFormat.rawValue)
+            self.showAlertView(message: InputError.emailIsNotFormat.rawValue)
             return false
         }
         
         guard let pwdFormat = pwdTextField.text, pwdFormat.characters.count>=6 else {
-            self.showAlertView(message: InputError.PasswordIsNotFormat.rawValue)
+            self.showAlertView(message: InputError.passwordIsNotFormat.rawValue)
             return false
         }
-        
         return true
     }
     
@@ -122,12 +131,12 @@ class LoginVC: UIViewController {
                     FIRAuth.auth()?.createUser(withEmail: email, password: pwd, completion: { (user, error) in
                         if error != nil {
                             print("MARK: (Email) User can't authenticate with firebase")
-                            print(error)
                         }else {
                             print("MARK: (Email) User successfully create a new account")
                             if let user = user {
                                 let userdata = ["provider": user.providerID]
                                 DataService.dataservice.createDBUser(uid: user.uid, userData: userdata)
+                                self.newUserHasSign = true
                                 self.checkUserKeyChain(user)
                             }
                         }
